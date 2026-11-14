@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>舞動跨世代：快樂身心社大舞 | 彰化社區大學</title>
+    <!-- 引入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入 Google Fonts Noto Sans TC 提升中文閱讀體驗 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- 自訂 Tailwind 設定與高可讀性字級控制 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans TC"', 'sans-serif'],
+                    },
+                    colors: {
+                        cream: '#FFFDF9',
+                        warmOrange: {
+                            50: '#FFF7ED',
+                            100: '#FFEDD5',
+                            500: '#F97316',
+                            600: '#EA580C',
+                        },
+                        coral: {
+                            50: '#FFF1F2',
+                            100: '#FFE4E6',
+                            500: '#F43F5E',
+                            600: '#E11D48',
+                        },
+                        calmTeal: {
+                            50: '#F0FDFA',
+                            100: '#CCFBF1',
+                            600: '#0D9488',
+                            700: '#0F766E',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* 支援無障礙字體大小切換的基礎設定 */
+        html {
+            font-size: 16px;
+            transition: font-size 0.2s ease-in-out;
+        }
+        html.font-large {
+            font-size: 18.5px;
+        }
+        /* 自訂捲軸美化 */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FFF7ED;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #FDBA74;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #F97316;
+        }
+    </style>
+</head>
+<body class="bg-cream text-stone-800 antialiased selection:bg-warmOrange-500 selection:text-white">
+
+    <!-- 頂部導覽列與字體大小切換器（貼心樂齡設計） -->
+    <header class="sticky top-0 z-50 bg-cream/95 backdrop-blur-md border-b border-orange-100 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-2">
+            <div class="flex items-center gap-2.5">
+                <span class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-warmOrange-500 to-coral-500 text-white font-bold shadow-sm">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </span>
+                <div>
+                    <span class="text-xs font-bold tracking-wider text-calmTeal-700 block">彰化社區大學 18週精選課程</span>
+                    <span class="text-sm sm:text-base font-extrabold text-stone-900">舞動跨世代：快樂身心社大舞</span>
+                </div>
+            </div>
+
+            <!-- 導覽錨點與字級調整按鈕 -->
+            <div class="flex items-center gap-2 sm:gap-4">
+                <nav class="hidden md:flex items-center gap-5 text-sm font-medium text-stone-600">
+                    <a href="#core-info" class="hover:text-warmOrange-600 transition-colors">課程核心</a>
+                    <a href="#teaching-design" class="hover:text-warmOrange-600 transition-colors">教學亮點</a>
+                    <a href="#syllabus" class="hover:text-warmOrange-600 transition-colors">18週大綱</a>
+                </nav>
+                <button id="fontToggleBtn" type="button" onclick="toggleFontSize()" 
+                    class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs sm:text-sm font-bold bg-calmTeal-50 text-calmTeal-700 border border-calmTeal-200 hover:bg-calmTeal-100 active:scale-95 transition-all cursor-pointer"
+                    aria-label="切換字體大小">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                    </svg>
+                    <span id="fontToggleText">放大字體</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 1. 頂部視覺橫幅 (Hero Section) -->
+    <section class="relative overflow-hidden bg-gradient-to-br from-warmOrange-50 via-coral-50 to-calmTeal-50 pt-10 pb-14 sm:pt-16 sm:pb-20 border-b border-orange-100">
+        <!-- 裝飾背景圓形 -->
+        <div class="absolute -top-24 -right-24 w-80 h-80 rounded-full bg-warmOrange-500/10 blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -left-24 w-80 h-80 rounded-full bg-calmTeal-600/10 blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
+            <div class="max-w-4xl mx-auto text-center">
+                <!-- 主辦單位與招生對象徽章 -->
+                <div class="inline-flex flex-wrap items-center justify-center gap-2 mb-5">
+                    <span class="px-4 py-1.5 rounded-full bg-white text-warmOrange-600 font-bold text-sm shadow-sm border border-orange-200 flex items-center gap-1.5">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" /></svg>
+                        主辦單位：彰化社區大學
+                    </span>
+                    <span class="px-4 py-1.5 rounded-full bg-calmTeal-600 text-white font-bold text-sm shadow-sm flex items-center gap-1.5">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                        招生對象：20至80歲跨世代學員
+                    </span>
+                </div>
+
+                <!-- 課程名稱主標題 -->
+                <h1 class="text-3xl sm:text-5xl md:text-6xl font-black text-stone-900 tracking-tight leading-tight mb-5">
+                    舞動跨世代：<br class="sm:hidden" />
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-warmOrange-600 via-coral-600 to-calmTeal-600">
+                        快樂身心社大舞
+                    </span>
+                </h1>
+
+                <p class="text-base sm:text-xl text-stone-700 leading-relaxed max-w-2xl mx-auto mb-7 font-medium">
+                    打破年齡界線的18週活力共學之旅！把廣場舞變成情緒抒發與數位探索的快樂舞台，讓年輕人與樂齡族一起舞出健康與自信。
+                </p>
+
+                <!-- 18週課程亮點標籤 -->
+                <div class="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 mb-9">
+                    <span class="px-4 py-2 rounded-2xl bg-white/90 border border-coral-200 text-coral-600 font-bold text-sm sm:text-base shadow-sm flex items-center gap-1.5">
+                        <span>❤️</span> 社會情緒學習 (SEL)
+                    </span>
+                    <span class="px-4 py-2 rounded-2xl bg-white/90 border border-calmTeal-200 text-calmTeal-700 font-bold text-sm sm:text-base shadow-sm flex items-center gap-1.5">
+                        <span>📱</span> 實用資訊素養
+                    </span>
+                    <span class="px-4 py-2 rounded-2xl bg-white/90 border border-warmOrange-200 text-warmOrange-600 font-bold text-sm sm:text-base shadow-sm flex items-center gap-1.5">
+                        <span>✨</span> 零基礎友善入門
+                    </span>
+                    <span class="px-4 py-2 rounded-2xl bg-white/90 border border-amber-200 text-amber-700 font-bold text-sm sm:text-base shadow-sm flex items-center gap-1.5">
+                        <span>🗓️</span> 18週完整系統規劃
+                    </span>
+                </div>
+
+                <!-- 快速導覽行動按鈕 -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+                    <a href="#syllabus" class="w-full sm:w-auto px-8 py-3.5 rounded-2xl bg-gradient-to-r from-warmOrange-500 to-coral-500 hover:from-warmOrange-600 hover:to-coral-600 text-white font-bold text-base sm:text-lg shadow-md hover:shadow-lg transition-all text-center">
+                        瀏覽 18 週完整課表 ↓
+                    </a>
+                    <a href="#core-info" class="w-full sm:w-auto px-8 py-3.5 rounded-2xl bg-white hover:bg-orange-50 text-stone-800 border-2 border-orange-200 font-bold text-base sm:text-lg transition-all text-center">
+                        了解課程理念與目標
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. 課程核心資訊區（卡片式排版） -->
+    <main id="core-info" class="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16 space-y-10 sm:space-y-12">
+
+        <!-- 第一排：課程理念（高亮重點大卡） -->
+        <section class="bg-white rounded-3xl p-6 sm:p-9 shadow-sm border border-orange-100 relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-2 h-full bg-gradient-to-b from-warmOrange-500 to-coral-500"></div>
+            <div class="flex flex-col md:flex-row md:items-center gap-6">
+                <div class="flex-shrink-0 w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-warmOrange-100 text-warmOrange-600 flex items-center justify-center">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                    </svg>
+                </div>
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-warmOrange-600 block mb-1">Course Philosophy</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-stone-900 mb-3">課程理念</h2>
+                    <p class="text-base sm:text-lg text-stone-700 leading-relaxed font-medium">
+                        融合社會情緒與資訊素養，透過廣場舞促進跨世代健康。學員在律動中覺察情緒、建立人際連結，並運用數位工具學習，綻放自信風采。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 第二排：課程目標（五大面向清晰呈現） -->
+        <section class="bg-white rounded-3xl p-6 sm:p-9 shadow-sm border border-teal-100">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-12 h-12 rounded-2xl bg-calmTeal-100 text-calmTeal-700 flex items-center justify-center flex-shrink-0">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                </div>
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-calmTeal-700 block">Course Objectives</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-stone-900">課程目標（五大核心面向）</h2>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+                <!-- 1. 緣由 -->
+                <div class="rounded-2xl bg-orange-50/70 border border-orange-200/80 p-5 flex flex-col">
+                    <div class="inline-flex items-center gap-2 mb-2.5">
+                        <span class="w-7 h-7 rounded-lg bg-warmOrange-500 text-white font-bold text-sm flex items-center justify-center">1</span>
+                        <h3 class="text-lg font-extrabold text-warmOrange-700">緣由</h3>
+                    </div>
+                    <p class="text-stone-700 text-sm sm:text-base leading-relaxed">
+                        因應高齡化與數位時代，打造跨世代共學舞臺。
+                    </p>
+                </div>
+
+                <!-- 2. 知識 -->
+                <div class="rounded-2xl bg-rose-50/70 border border-rose-200/80 p-5 flex flex-col">
+                    <div class="inline-flex items-center gap-2 mb-2.5">
+                        <span class="w-7 h-7 rounded-lg bg-coral-500 text-white font-bold text-sm flex items-center justify-center">2</span>
+                        <h3 class="text-lg font-extrabold text-coral-700">知識</h3>
+                    </div>
+                    <p class="text-stone-700 text-sm sm:text-base leading-relaxed">
+                        認識肢體律動、情緒覺察與數位資訊判讀。
+                    </p>
+                </div>
+
+                <!-- 3. 技能 -->
+                <div class="rounded-2xl bg-teal-50/70 border border-teal-200/80 p-5 flex flex-col">
+                    <div class="inline-flex items-center gap-2 mb-2.5">
+                        <span class="w-7 h-7 rounded-lg bg-calmTeal-600 text-white font-bold text-sm flex items-center justify-center">3</span>
+                        <h3 class="text-lg font-extrabold text-calmTeal-700">技能</h3>
+                    </div>
+                    <p class="text-stone-700 text-sm sm:text-base leading-relaxed">
+                        掌握多元舞步及影音工具操作。
+                    </p>
+                </div>
+
+                <!-- 4. 態度 -->
+                <div class="rounded-2xl bg-amber-50/70 border border-amber-200/80 p-5 flex flex-col">
+                    <div class="inline-flex items-center gap-2 mb-2.5">
+                        <span class="w-7 h-7 rounded-lg bg-amber-500 text-white font-bold text-sm flex items-center justify-center">4</span>
+                        <h3 class="text-lg font-extrabold text-amber-800">態度</h3>
+                    </div>
+                    <p class="text-stone-700 text-sm sm:text-base leading-relaxed">
+                        培養正向溝通與包容心。
+                    </p>
+                </div>
+
+                <!-- 5. 連結 -->
+                <div class="rounded-2xl bg-emerald-50/70 border border-emerald-200/80 p-5 flex flex-col sm:col-span-2 lg:col-span-1">
+                    <div class="inline-flex items-center gap-2 mb-2.5">
+                        <span class="w-7 h-7 rounded-lg bg-emerald-600 text-white font-bold text-sm flex items-center justify-center">5</span>
+                        <h3 class="text-lg font-extrabold text-emerald-800">連結</h3>
+                    </div>
+                    <p class="text-stone-700 text-sm sm:text-base leading-relaxed">
+                        藉由社區展演與公益服務，凝聚彰化在地情誼。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 第三排：條件限制（學員資格） & 授課方式（雙欄卡片） -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+            <!-- 條件限制（學員資格） -->
+            <section class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-orange-100 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-11 h-11 rounded-2xl bg-coral-100 text-coral-600 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="text-xs font-bold uppercase tracking-wider text-coral-600 block">Eligibility</span>
+                            <h2 class="text-xl sm:text-2xl font-extrabold text-stone-900">條件限制（學員資格）</h2>
+                        </div>
+                    </div>
+                    <p class="text-stone-700 text-base leading-relaxed mb-5">
+                        本課程為初階入門，歡迎20至80歲對舞蹈有興趣的民眾報名，無須舞蹈基礎或高階體能。學員僅需具備基本生活自理與行走能力，建議自備智慧型手機以利課後數位學習，課程將依個人體能彈性調整動作強度。
+                    </p>
+                </div>
+                <div class="flex flex-wrap gap-2 pt-3 border-t border-stone-100">
+                    <span class="px-3 py-1 rounded-xl bg-coral-50 text-coral-700 text-xs sm:text-sm font-bold">🌱 初階入門無須基礎</span>
+                    <span class="px-3 py-1 rounded-xl bg-orange-50 text-warmOrange-700 text-xs sm:text-sm font-bold">💪 依體能彈性調整強度</span>
+                    <span class="px-3 py-1 rounded-xl bg-teal-50 text-calmTeal-700 text-xs sm:text-sm font-bold">📱 建議自備智慧型手機</span>
+                </div>
+            </section>
+
+            <!-- 授課方式（標籤化視覺呈現） -->
+            <section class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-teal-100 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-11 h-11 rounded-2xl bg-calmTeal-100 text-calmTeal-700 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="text-xs font-bold uppercase tracking-wider text-calmTeal-700 block">Teaching Methods</span>
+                            <h2 class="text-xl sm:text-2xl font-extrabold text-stone-900">授課方式</h2>
+                        </div>
+                    </div>
+                    <p class="text-stone-600 text-sm sm:text-base mb-4">多元互動教學，兼顧動作安全、團隊樂趣與數位實作：</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                        <div class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-2xl bg-warmOrange-50 border border-warmOrange-200/70 text-stone-800 font-bold text-sm sm:text-base">
+                            <span class="text-warmOrange-600">🕺</span> 講師示範與實際操作
+                        </div>
+                        <div class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-2xl bg-coral-50 border border-coral-200/70 text-stone-800 font-bold text-sm sm:text-base">
+                            <span class="text-coral-600">🤝</span> 團體互動及小組活動
+                        </div>
+                        <div class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-2xl bg-calmTeal-50 border border-calmTeal-200/70 text-stone-800 font-bold text-sm sm:text-base">
+                            <span class="text-calmTeal-600">🎬</span> 影片欣賞及圖像教學
+                        </div>
+                        <div class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-2xl bg-amber-50 border border-amber-200/70 text-stone-800 font-bold text-sm sm:text-base">
+                            <span class="text-amber-600">🎯</span> 個別指導與反覆練習
+                        </div>
+                        <div class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-2xl bg-rose-50 border border-rose-200/70 text-stone-800 font-bold text-sm sm:text-base">
+                            <span class="text-rose-600">🌟</span> 學員上台表演與展現
+                        </div>
+                        <div class="flex items-center gap-2.5 px-3.5 py-2.5 rounded-2xl bg-emerald-50 border border-emerald-200/70 text-stone-800 font-bold text-sm sm:text-base">
+                            <span class="text-emerald-600">💬</span> 案例討論與心得分享
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- 第四排：教學設計亮點（第4週範例） & 發展計畫 -->
+        <div id="teaching-design" class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8">
+            <!-- 教學設計亮點（佔7欄，特別強調第4週範例） -->
+            <section class="lg:col-span-7 bg-gradient-to-br from-coral-500 to-warmOrange-500 rounded-3xl p-6 sm:p-8 text-white shadow-md relative overflow-hidden">
+                <div class="absolute -right-8 -bottom-8 w-40 h-40 rounded-full bg-white/10 pointer-events-none"></div>
+                <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/20 backdrop-blur-sm text-white text-xs sm:text-sm font-bold mb-4">
+                    <span>✨ 特色課程教案搶先看</span>
+                </div>
+                <h2 class="text-2xl sm:text-3xl font-extrabold mb-3">
+                    教學設計亮點：第4週《情緒色票律動》
+                </h2>
+                <div class="bg-white/15 backdrop-blur-sm rounded-2xl p-5 border border-white/25">
+                    <p class="text-base sm:text-lg leading-relaxed font-medium">
+                        第4週《情緒色票律動》：暖身後以手機播放音樂，引導學員覺察當下情緒並挑選代表色絲巾，分組共創專屬舞步，最後互相回饋分享。
+                    </p>
+                </div>
+                <div class="mt-4 flex flex-wrap gap-2 text-xs sm:text-sm font-bold text-orange-50">
+                    <span class="px-3 py-1 rounded-xl bg-black/15">1. 暖身與手機播樂</span>
+                    <span class="px-3 py-1 rounded-xl bg-black/15">2. 情緒覺察選色巾</span>
+                    <span class="px-3 py-1 rounded-xl bg-black/15">3. 分組共創舞步</span>
+                    <span class="px-3 py-1 rounded-xl bg-black/15">4. 正向回饋分享</span>
+                </div>
+            </section>
+
+            <!-- 發展計畫（佔5欄） -->
+            <section class="lg:col-span-5 bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-teal-200 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-11 h-11 rounded-2xl bg-calmTeal-600 text-white flex items-center justify-center flex-shrink-0">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="text-xs font-bold uppercase tracking-wider text-calmTeal-700 block">Future Roadmap</span>
+                            <h2 class="text-xl sm:text-2xl font-extrabold text-stone-900">未來發展計畫</h2>
+                        </div>
+                    </div>
+                    <p class="text-stone-700 text-base leading-relaxed mb-4">
+                        未來將進階開設「社區巡演與編舞」課，整合彰化在地文化與數位影音紀錄，培育學員成為社區健康種子講師。
+                    </p>
+                </div>
+                <div class="p-4 rounded-2xl bg-calmTeal-50 border border-calmTeal-100 text-calmTeal-800 text-sm font-bold flex items-center gap-3">
+                    <span class="text-2xl">🌱</span>
+                    <span>從快樂學員蛻變為彰化在地社區健康種子講師！</span>
+                </div>
+            </section>
+        </div>
+
+        <!-- 3. 18週完整課程大綱（互動式篩選與響應式表格/卡片） -->
+        <section id="syllabus" class="pt-4">
+            <div class="bg-white rounded-3xl p-6 sm:p-9 shadow-sm border border-orange-100">
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-warmOrange-600 block mb-1">18-Week Curriculum</span>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-stone-900">18週完整課程大綱</h2>
+                        <p class="text-stone-600 text-sm sm:text-base mt-1">點擊下方分類按鈕，快速篩選您感興趣的課程主題亮點</p>
+                    </div>
+                    <div class="text-sm font-bold text-calmTeal-700 bg-calmTeal-50 px-4 py-2 rounded-2xl border border-calmTeal-200 self-start md:self-auto">
+                        目前顯示：<span id="visibleCount">18</span> 週課程
+                    </div>
+                </div>
+
+                <!-- 互動式分類篩選按鈕列 -->
+                <div class="flex flex-wrap gap-2 sm:gap-2.5 mb-7" role="tablist" aria-label="課程大綱分類篩選">
+                    <button type="button" onclick="filterSyllabus('all', this)" 
+                        class="filter-btn active px-4 py-2.5 rounded-2xl text-sm sm:text-base font-bold transition-all cursor-pointer bg-stone-900 text-white shadow-sm">
+                        全部週次 (18)
+                    </button>
+                    <button type="button" onclick="filterSyllabus('sel', this)" 
+                        class="filter-btn px-4 py-2.5 rounded-2xl text-sm sm:text-base font-bold transition-all cursor-pointer bg-coral-50 text-coral-700 border border-coral-200 hover:bg-coral-100">
+                        ❤️ 社會情緒學習 SEL
+                    </button>
+                    <button type="button" onclick="filterSyllabus('digital', this)" 
+                        class="filter-btn px-4 py-2.5 rounded-2xl text-sm sm:text-base font-bold transition-all cursor-pointer bg-calmTeal-50 text-calmTeal-700 border border-calmTeal-200 hover:bg-calmTeal-100">
+                        📱 資訊素養
+                    </button>
+                    <button type="button" onclick="filterSyllabus('dance', this)" 
+                        class="filter-btn px-4 py-2.5 rounded-2xl text-sm sm:text-base font-bold transition-all cursor-pointer bg-warmOrange-50 text-warmOrange-700 border border-warmOrange-200 hover:bg-warmOrange-100">
+                        💃 舞技與在地文化
+                    </button>
+                    <button type="button" onclick="filterSyllabus('special', this)" 
+                        class="filter-btn px-4 py-2.5 rounded-2xl text-sm sm:text-base font-bold transition-all cursor-pointer bg-amber-50 text-amber-800 border border-amber-200 hover:bg-amber-100">
+                        🏆 特別週與成果展
+                    </button>
+                </div>
+
+                <!-- 桌面版：高可讀性表格呈現 (md 以上顯示) -->
+                <div class="hidden md:block overflow-hidden rounded-2xl border border-stone-200">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-gradient-to-r from-warmOrange-50 to-coral-50 border-b border-stone-200 text-stone-800">
+                                <th class="py-4 px-5 font-extrabold text-base w-28 text-center">週次</th>
+                                <th class="py-4 px-5 font-extrabold text-base w-1/3">主題與核心元素</th>
+                                <th class="py-4 px-5 font-extrabold text-base">課程內容說明</th>
+                            </tr>
+                        </thead>
+                        <tbody id="desktopTableBody" class="divide-y divide-stone-200 bg-white">
+                            <!-- 由 JavaScript 動態渲染 1~18 週完整資料 -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 手機/平板版：卡片式呈現 (md 以下顯示，避免橫向捲動) -->
+                <div id="mobileCardList" class="md:hidden space-y-4">
+                    <!-- 由 JavaScript 動態渲染 1~18 週完整卡片 -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 頁尾資訊 -->
+    <footer class="bg-stone-900 text-stone-300 py-10 mt-12">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 text-center space-y-3">
+            <div class="inline-flex items-center gap-2 text-white font-extrabold text-lg sm:text-xl">
+                <span>💃</span>
+                <span>彰化社區大學｜舞動跨世代：快樂身心社大舞</span>
+            </div>
+            <p class="text-sm sm:text-base text-stone-400 max-w-xl mx-auto">
+                歡迎 20 至 80 歲熱愛生活、想認識新朋友的您加入我們！零基礎也能輕鬆上手，一起舞出健康、情緒自在與數位新生活。
+            </p>
+            <div class="pt-4 border-t border-stone-800 text-xs text-stone-500">
+                © 彰化社區大學 18週特色課程規劃網頁
+            </div>
+        </div>
+    </footer>
+
+    <!-- 課程資料與互動邏輯腳本 -->
+    <script>
+        // 完整 18 週課程大綱資料（嚴格依照指定文字與分類標籤建構）
+        const syllabusData = [
+            {
+                week: "第1週",
+                title: "相見歡：破冰律動與數位初體驗",
+                content: "透過趣味節奏遊戲認識跨世代夥伴，建立班級公約。教學員加入課程LINE群組與基礎操作，開啟快樂共學第一步。",
+                categories: ["sel", "digital"],
+                badges: [
+                    { text: "社會情緒學習", type: "sel" },
+                    { text: "資訊素養", type: "digital" }
+                ]
+            },
+            {
+                week: "第2週",
+                title: "身體地圖：基礎步伐與自我覺察",
+                content: "練習基礎踏併步與核心穩定，結合「社會情緒學習（SEL）」引導學員覺察身體緊繃與壓力來源，學習用呼吸放鬆身心。",
+                categories: ["sel", "dance"],
+                badges: [
+                    { text: "社會情緒學習", type: "sel" },
+                    { text: "基礎舞步", type: "dance" }
+                ]
+            },
+            {
+                week: "第3週",
+                title: "數位搜查線：尋找你的命定舞曲",
+                content: "教導學員使用YouTube搜尋教學影片與調整播放速度（資訊素養），分組票選最受歡迎的經典與流行金曲作為練習曲目。",
+                categories: ["digital"],
+                badges: [
+                    { text: "資訊素養", type: "digital" }
+                ]
+            },
+            {
+                week: "第4週",
+                title: "情緒色票律動：舞出內心色彩",
+                content: "結合情緒辨識練習，讓學員依心情挑選彩色絲巾融入舞步，透過肢體抒發喜怒哀樂，並在小組中分享彼此的感受。",
+                categories: ["sel", "dance"],
+                badges: [
+                    { text: "教學設計亮點", type: "highlight" },
+                    { text: "社會情緒學習", type: "sel" }
+                ]
+            },
+            {
+                week: "第5週",
+                title: "世代混搭風：復古迪斯可遇上流行樂",
+                content: "融合70年代復古舞步與現代流行節奏，讓年輕與樂齡學員互相指導彼此熟悉的動作，在笑聲中打破年齡隔閡。",
+                categories: ["dance", "sel"],
+                badges: [
+                    { text: "跨世代舞技", type: "dance" },
+                    { text: "人際互動", type: "sel" }
+                ]
+            },
+            {
+                week: "第6週",
+                title: "網路謠言退散：健康運動資訊判讀",
+                content: "融入資訊素養，解析網路常見的錯誤運動與保健偏方，建立正確暖身與護膝觀念，並練習查證健康資訊的真偽。",
+                categories: ["digital"],
+                badges: [
+                    { text: "資訊素養", type: "digital" }
+                ]
+            },
+            {
+                week: "第7週",
+                title: "默契大考驗：雙人與小組隊形變換",
+                content: "練習圓圈、交錯等廣場舞經典隊形。強調傾聽與非語言溝通（SEL），學習在團隊中互相補位、尊重彼此的節奏差異。",
+                categories: ["sel", "dance"],
+                badges: [
+                    { text: "社會情緒學習", type: "sel" },
+                    { text: "團隊隊形", type: "dance" }
+                ]
+            },
+            {
+                week: "第8週",
+                title: "鏡頭下的自己：手機錄影與自我回饋",
+                content: "學習使用手機腳架與錄影功能記錄練習畫面，透過回放觀察自身姿勢並給予正向肯定，克服面對鏡頭的害羞感。",
+                categories: ["digital", "sel"],
+                badges: [
+                    { text: "資訊素養", type: "digital" },
+                    { text: "自我肯定", type: "sel" }
+                ]
+            },
+            {
+                week: "第9週",
+                title: "公民素養週",
+                content: "由彰化社區大學安排",
+                categories: ["special"],
+                isCivicWeek: true,
+                badges: [
+                    { text: "彰化社大特別週", type: "special" }
+                ]
+            },
+            {
+                week: "第10週",
+                title: "異國風情畫：熱情拉丁與森巴律動",
+                content: "體驗輕快活潑的拉丁基礎扭腰與步伐，釋放日常壓力，並透過分組接力賽激發團隊榮譽感與正向鼓勵文化。",
+                categories: ["dance", "sel"],
+                badges: [
+                    { text: "多元舞技", type: "dance" },
+                    { text: "正向鼓勵", type: "sel" }
+                ]
+            },
+            {
+                week: "第11週",
+                title: "數位小主播：短影音剪輯初階教學",
+                content: "介紹簡易手機剪輯App，教導學員為練習影片加上字幕與濾鏡，並宣導肖像權與網路隱私保護（資訊素養）。",
+                categories: ["digital"],
+                badges: [
+                    { text: "資訊素養", type: "digital" }
+                ]
+            },
+            {
+                week: "第12週",
+                title: "同理心劇場：跨世代肢體對話",
+                content: "透過鏡像模仿遊戲，兩人一組輪流擔任領舞者與跟隨者，培養換位思考與同理心，提升人際互動的敏銳度與信任感。",
+                categories: ["sel"],
+                badges: [
+                    { text: "社會情緒學習", type: "sel" }
+                ]
+            },
+            {
+                week: "第13週",
+                title: "在地文化情：彰化風光融入創意編舞",
+                content: "結合彰化八卦山、扇形車庫等在地意象設計特色手勢，讓學員共同發想專屬動作，增強對家鄉的認同感與連結。",
+                categories: ["dance"],
+                badges: [
+                    { text: "彰化在地文化", type: "dance" }
+                ]
+            },
+            {
+                week: "第14週",
+                title: "舞台魅力養成：表情管理與自信展現",
+                content: "針對成果展曲目進行細節雕琢，練習眼神交流與微笑表達，引導學員克服上台緊張情緒，建立自我效能與自信心。",
+                categories: ["sel", "dance"],
+                badges: [
+                    { text: "社會情緒學習", type: "sel" },
+                    { text: "舞台展現", type: "dance" }
+                ]
+            },
+            {
+                week: "第15週",
+                title: "數位宣傳戰：製作我們的成果展海報",
+                content: "運用免費手機設計工具（如Canva）製作電子邀請卡，學習辨識版權圖片，並分享至社群平台邀請親友前來觀賞。",
+                categories: ["digital"],
+                badges: [
+                    { text: "資訊素養", type: "digital" }
+                ]
+            },
+            {
+                week: "第16週",
+                title: "總彩排與壓力調適：團隊凝聚時刻",
+                content: "進行完整曲目走位與服裝彩排，透過團體靜心與正向喊話舒緩賽前焦慮，強化彼此支持、共好共榮的團隊精神。",
+                categories: ["sel", "dance"],
+                badges: [
+                    { text: "壓力調適", type: "sel" },
+                    { text: "總彩排", type: "dance" }
+                ]
+            },
+            {
+                week: "第17週",
+                title: "社區關懷快閃：把快樂帶進鄰里",
+                content: "走入彰化在地社區或公園進行小型公益快閃演出，實踐社會參與，並於活動後進行深度心得交流與情感凝聚。",
+                categories: ["dance", "sel"],
+                badges: [
+                    { text: "社區公益快閃", type: "dance" },
+                    { text: "情感凝聚", type: "sel" }
+                ]
+            },
+            {
+                week: "第18週",
+                title: "舞動彰化‧閃耀世代成果展",
+                content: "舉辦期末盛大成果發表會，展現18週學習結晶與數位紀錄影片，頒發特色獎項肯定每位學員的突破與成長。",
+                categories: ["special"],
+                isShowcase: true,
+                badges: [
+                    { text: "期末成果展", type: "showcase" }
+                ]
+            }
+        ];
+
+        // 取得標籤樣式輔助函式
+        function getBadgeStyle(type) {
+            switch (type) {
+                case 'sel':
+                    return 'bg-coral-50 text-coral-700 border-coral-200';
+                case 'digital':
+                    return 'bg-calmTeal-50 text-calmTeal-700 border-calmTeal-200';
+                case 'dance':
+                    return 'bg-warmOrange-50 text-warmOrange-700 border-warmOrange-200';
+                case 'highlight':
+                    return 'bg-gradient-to-r from-coral-500 to-warmOrange-500 text-white border-transparent';
+                case 'showcase':
+                    return 'bg-gradient-to-r from-warmOrange-500 to-amber-500 text-white border-transparent';
+                case 'special':
+                default:
+                    return 'bg-amber-50 text-amber-800 border-amber-200';
+            }
+        }
+
+        // 渲染課程大綱（同時更新桌面表格與手機卡片）
+        function renderSyllabus(filterCategory = 'all') {
+            const desktopBody = document.getElementById('desktopTableBody');
+            const mobileList = document.getElementById('mobileCardList');
+            const visibleCountEl = document.getElementById('visibleCount');
+
+            const filtered = filterCategory === 'all' 
+                ? syllabusData 
+                : syllabusData.filter(item => item.categories.includes(filterCategory));
+
+            visibleCountEl.textContent = filtered.length;
+
+            // 1. 渲染桌面版表格列
+            desktopBody.innerHTML = filtered.map(item => {
+                // 針對第9週公民素養週與第18週成果展給予特殊柔和底色
+                let rowBgClass = 'hover:bg-orange-50/40 transition-colors';
+                if (item.isCivicWeek) rowBgClass = 'bg-amber-50/60 hover:bg-amber-50 transition-colors';
+                if (item.isShowcase) rowBgClass = 'bg-gradient-to-r from-warmOrange-50/80 to-coral-50/80 hover:from-warmOrange-50 hover:to-coral-50 transition-colors';
+
+                const badgesHtml = item.badges.map(b => 
+                    `<span class="inline-block px-2.5 py-0.5 rounded-lg text-xs font-bold border ${getBadgeStyle(b.type)}">${b.text}</span>`
+                ).join(' ');
+
+                return `
+                    <tr class="${rowBgClass}">
+                        <td class="py-4 px-5 text-center align-top">
+                            <span class="inline-block px-3 py-1 rounded-xl font-extrabold text-sm ${item.isShowcase ? 'bg-warmOrange-600 text-white' : 'bg-stone-100 text-stone-800'}">
+                                ${item.week}
+                            </span>
+                        </td>
+                        <td class="py-4 px-5 align-top">
+                            <div class="font-extrabold text-stone-900 text-base mb-1.5">${item.title}</div>
+                            <div class="flex flex-wrap gap-1.5">${badgesHtml}</div>
+                        </td>
+                        <td class="py-4 px-5 text-stone-700 text-base leading-relaxed align-top">
+                            ${item.content}
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+
+            // 2. 渲染手機/平板版卡片
+            mobileList.innerHTML = filtered.map(item => {
+                let cardBorderClass = 'border-stone-200 bg-white';
+                if (item.isCivicWeek) cardBorderClass = 'border-amber-300 bg-amber-50/60';
+                if (item.isShowcase) cardBorderClass = 'border-warmOrange-300 bg-gradient-to-br from-warmOrange-50 to-coral-50';
+
+                const badgesHtml = item.badges.map(b => 
+                    `<span class="inline-block px-2.5 py-0.5 rounded-lg text-xs font-bold border ${getBadgeStyle(b.type)}">${b.text}</span>`
+                ).join(' ');
+
+                return `
+                    <article class="rounded-2xl border ${cardBorderClass} p-5 shadow-xs">
+                        <div class="flex flex-wrap items-center justify-between gap-2 mb-2.5">
+                            <span class="px-3 py-1 rounded-xl font-extrabold text-sm ${item.isShowcase ? 'bg-warmOrange-600 text-white' : 'bg-stone-800 text-white'}">
+                                ${item.week}
+                            </span>
+                            <div class="flex flex-wrap gap-1.5">${badgesHtml}</div>
+                        </div>
+                        <h3 class="text-lg font-extrabold text-stone-900 mb-2">${item.title}</h3>
+                        <p class="text-stone-700 text-sm sm:text-base leading-relaxed">${item.content}</p>
+                    </article>
+                `;
+            }).join('');
+        }
+
+        // 分類篩選按鈕點擊處理
+        function filterSyllabus(category, clickedBtn) {
+            // 重設所有按鈕樣式
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-stone-900', 'text-white', 'shadow-sm', 'ring-2', 'ring-offset-1', 'ring-stone-900');
+                // 還原各按鈕原本的柔和色彩
+                if (btn.textContent.includes('全部')) {
+                    btn.classList.add('bg-stone-100', 'text-stone-800');
+                }
+            });
+
+            // 設定當前選中按鈕樣式
+            clickedBtn.classList.remove('bg-stone-100', 'text-stone-800');
+            clickedBtn.classList.add('bg-stone-900', 'text-white', 'shadow-sm', 'ring-2', 'ring-offset-1', 'ring-stone-900');
+
+            // 重新渲染列表
+            renderSyllabus(category);
+        }
+
+        // 字體大小切換（專為長輩與視力友善設計）
+        function toggleFontSize() {
+            const htmlEl = document.documentElement;
+            const textEl = document.getElementById('fontToggleText');
+            const isLarge = htmlEl.classList.toggle('font-large');
+            textEl.textContent = isLarge ? '標準字體' : '放大字體';
+        }
+
+        // 頁面載入完成後初始化 18 週課程表
+        document.addEventListener('DOMContentLoaded', () => {
+            renderSyllabus('all');
+        });
+    </script>
+</body>
+</html>
